@@ -16,7 +16,9 @@ except socket.error as e:
 s.listen()
 print("Waiting for a connection, Server Started")
 
+playerAuth = {'Smarkacz':{'Password':'notwork'}}
 
+playerlist = {"Smarkacz":1}
 players = [Player(0,0,50,50,(255,0,0)), Player(100,100, 50,50,(0,255,0))]
 
 def threaded_client(conn, player):
@@ -29,7 +31,9 @@ def threaded_client(conn, player):
             if "Username" in data:
                 currentPlayer = data['Username']
                 password = data["Password"]
-                print(currentPlayer)
+                print(playerAuth[data['username']])
+                if currentPlayer == playerAuth[data['username']]:
+                    print('gówno')
             if not data:
                 print("Disconnected")
                 break
