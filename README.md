@@ -1,0 +1,2 @@
+# Affiliation-First-Python-MMORPG
+Affiliation it will be fully powered by python 2D MMORPG, In the beginning program will be able to give fun for 8 players,at the time  system will improve to give access for a lot of player. Every information about player should be saved on server and available to get access for every player, First few versions would be not user friendly so probably only python devs would know how to get in on and start playing.
