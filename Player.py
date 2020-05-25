@@ -1,4 +1,5 @@
 import pygame
+from ModelsLoader import *
 
 class Player(object):
     def __init__(self,x,y,width,height,color):
@@ -11,9 +12,9 @@ class Player(object):
         self.color = color
 
     def draw(self, win):
-        #char = pygame.image.load('standing.png')
-        #win.blit(char, (self.x, self.y))
-        pygame.draw.rect(win, self.color, self.rect)
+        win.blit(head, (self.x, self.y))
+        win.blit(chest,(self.x, self.y))
+        #pygame.draw.rect(win, self.color, self.rect)
 
     def move(self):
         keys = pygame.key.get_pressed()

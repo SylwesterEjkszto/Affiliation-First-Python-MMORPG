@@ -7,12 +7,15 @@ import random
 from Settings import *
 from network import Network
 from Player import Player
+from ModelsLoader import *
 #game window
 pygame.init()
 resolution = (WIDTH,HEIGHT)
 win = pygame.display.set_mode(resolution)
 pygame.display.set_caption(TITLE)
 mainClock = pygame.time.Clock()
+
+# prepare and open user name and password from auth.txt
 file1 = open("auth.txt","r")
 auth = {}
 authlist = file1.readlines()
@@ -20,9 +23,10 @@ authlist = [x.replace('\n', '') for x in authlist]
 auth["Username"] = authlist[1]
 auth["Password"] = authlist[3]
 print(auth)
+
+
 #ImageLoader
-bg = pygame.image.load('bg.png')
-introbg = pygame.image.load('introbg.jpg')
+
 
 class button():
     def __init__(self, color, x, y, width, height, text=''):
@@ -67,10 +71,10 @@ def game_intro():
 
             if event.type ==pygame.MOUSEBUTTONDOWN:
                 if LogInButton.isOver(pos):
-                    n.send(auth)
+                    #n.send(auth) # sending username and password
                     Intro=False
                 elif SingInButton.isOver(pos):
-                    n.send(auth)
+                    #n.send(auth) # sending username and password
                     Intro=False
 
             if event.type == pygame.MOUSEMOTION:
@@ -83,6 +87,7 @@ def game_intro():
                 else:
                     SingInButton.color=(0,255,0)
 def draw_grid(win):
+    # tiles of map for easier map making
     for x in range(0, WIDTH, TILESIZE):
         pygame.draw.line(win, LIGHTGREY, (x, 0), (x, HEIGHT))
     for y in range(0, WIDTH, TILESIZE):
@@ -91,24 +96,25 @@ def redrawGameWindow():
     win.blit(bg,(0,0))
     draw_grid(win)
     p.draw(win)
-    p2.draw(win)
+    #p2.draw(win)
     pygame.display.update()
 
-n = Network()
-p = n.getP()
+#n = Network() communication betwen client and server
+#p = n.getP() get position from server
+p=Player(0,0,50,50,(255,0,0))
 LogInButton = button((0,255,0),50,500,150,75,"Log in")
 SingInButton = button((0,255,0),50,600,150,75,"Sign In")
 #main loop
 def main_loop():
     run=True
     while run:
-        #FPS
         mainClock.tick(60)
-        p2 = n.send(p)
+        #p2 = n.send(p)  #send position to server
        #quit
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+        #player movment
         p.move()
         redrawGameWindow()
 

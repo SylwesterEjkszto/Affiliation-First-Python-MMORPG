@@ -29,8 +29,8 @@ def threaded_client(conn, player):
             data = pickle.loads(conn.recv(2048))
             players[player] = data
             if "Username" in data:
-                currentPlayer = data['Username']
-                password = data["Password"]
+                #currentPlayer = data['Username']
+                #password = data["Password"]
                 print(playerAuth[data['username']])
                 if currentPlayer == playerAuth[data['username']]:
                     print('gówno')
@@ -53,7 +53,7 @@ def threaded_client(conn, player):
     print("Lost connection")
     conn.close()
 
-
+currentPlayer=0
 while True:
     conn, addr = s.accept()
     print("Connected to:", addr)
